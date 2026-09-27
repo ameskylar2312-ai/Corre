@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌼 Una flor para ti</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        overflow: hidden;
+        height: 100vh;
+        background: linear-gradient(
+            to bottom,
+            #bde7ff 0%,
+            #e9f8ff 55%,
+            #b8dfb0 55%,
+            #7fbd79 100%
+        );
+        font-family: Georgia, serif;
+    }
+
+    .escena {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* ☀️ Sol */
+    .sol {
+        position: absolute;
+        top: 45px;
+        right: 55px;
+        width: 80px;
+        height: 80px;
+        background: #ffe98a;
+        border-radius: 50%;
+        box-shadow: 0 0 35px #ffe98a;
+    }
+
+    /* 🌼 FLOR */
+    .flor {
+        position: absolute;
+        left: 50%;
+        top: 38%;
+        transform: translate(-50%, -50%);
+        width: 90px;
+        height: 90px;
+        animation: aparecerFlor 2s ease forwards;
+        z-index: 5;
+    }
+
+    .petalo {
+        position: absolute;
+        width: 42px;
+        height: 58px;
+        background: #ffd85c;
+        border-radius: 50%;
+        left: 24px;
+        top: 15px;
+        transform-origin: 21px 30px;
+    }
+
+    .petalo:nth-child(1) {
+        transform: rotate(0deg) translateY(-25px);
+    }
+
+    .petalo:nth-child(2) {
+        transform: rotate(60deg) translateY(-25px);
+    }
+
+    .petalo:nth-child(3) {
+        transform: rotate(120deg) translateY(-25px);
+    }
+
+    .petalo:nth-child(4) {
+        transform: rotate(180deg) translateY(-25px);
+    }
+
+    .petalo:nth-child(5) {
+        transform: rotate(240deg) translateY(-25px);
+    }
+
+    .petalo:nth-child(6) {
+        transform: rotate(300deg) translateY(-25px);
+    }
+
+    .centro {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        background: #9b5d20;
+        border-radius: 50%;
+        left: 28px;
+        top: 28px;
+        z-index: 2;
+    }
+
+    /* 🌱 TALLO Y RAÍZ */
+    .tallo {
+        position: absolute;
+        width: 8px;
+        height: 0;
+        background: #477d42;
+        left: 50%;
+        top: 43%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        animation: crecerTallo 2s ease 2s forwards;
+        z-index: 2;
+    }
+
+    .raices {
+        position: absolute;
+        left: 50%;
+        top: 67%;
+        width: 160px;
+        height: 100px;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation: aparecerRaiz 2s ease 3.5s forwards;
+        z-index: 1;
+    }
+
+    .raiz {
+        position: absolute;
+        width: 5px;
+        height: 85px;
+        background: #76502d;
+        border-radius: 10px;
+        left: 78px;
+        top: 0;
+        transform-origin: top;
+    }
+
+    .raiz:nth-child(1) {
+        transform: rotate(-35deg);
+    }
+
+    .raiz:nth-child(2) {
+        transform: rotate(-15deg);
+    }
+
+    .raiz:nth-child(3) {
+        transform: rotate(15deg);
+    }
+
+    .raiz:nth-child(4) {
+        transform: rotate(35deg);
+    }
+
+    /* 🌊 RÍO */
+    .rio {
+        position: absolute;
+        left: -10%;
+        bottom: -10px;
+        width: 120%;
+        height: 145px;
+        background: linear-gradient(
+            to bottom,
+            #83d9ed,
+            #45b9d4,
+            #2599bd
+        );
+        border-radius: 50% 50% 0 0;
+        opacity: 0;
+        animation: aparecerRio 2.5s ease 5s forwards;
+        z-index: 3;
+        overflow: hidden;
+    }
+
+    .onda {
+        position: absolute;
+        width: 220px;
+        height: 25px;
+        border-top: 4px solid rgba(255,255,255,.55);
+        border-radius: 50%;
+        animation: moverOnda 4s linear infinite;
+    }
+
+    .onda:nth-child(1) {
+        top: 35px;
+        left: 5%;
+    }
+
+    .onda:nth-child(2) {
+        top: 80px;
+        left: 45%;
+        animation-delay: 1s;
+    }
+
+    .onda:nth-child(3) {
+        top: 115px;
+        left: 75%;
+        animation-delay: 2s;
+    }
+
+    /* 💗 FRASE */
+    .frase {
+        position: absolute;
+        left: 50%;
+        bottom: 65px;
+        transform: translateX(-50%);
+        color: white;
+        font-size: clamp(24px, 6vw, 45px);
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        text-shadow:
+            0 2px 5px rgba(0,0,0,.25),
+            0 0 12px rgba(255,255,255,.5);
+        opacity: 0;
+        z-index: 10;
+        animation: aparecerFrase 2s ease 7s forwards;
+    }
+
+    .corazon {
+        display: inline-block;
+        animation: latir 1.2s infinite;
+    }
+
+    /* ✨ Animaciones */
+
+    @keyframes aparecerFlor {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(.2);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    @keyframes crecerTallo {
+        from {
+            height: 0;
+        }
+        to {
+            height: 210px;
+        }
+    }
+
+    @keyframes aparecerRaiz {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) scaleY(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) scaleY(1);
+        }
+    }
+
+    @keyframes aparecerRio {
+        from {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes aparecerFrase {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 30px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    @keyframes moverOnda {
+        from {
+            transform: translateX(-250px);
+        }
+        to {
+            transform: translateX(120vw);
+        }
+    }
+
+    @keyframes latir {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.25);
+        }
+    }
+
+    /* 📱 Celular */
+    @media (max-width: 600px) {
+        .sol {
+            width: 55px;
+            height: 55px;
+            top: 30px;
+            right: 25px;
+        }
+
+        .frase {
+            font-size: 27px;
+            white-space: normal;
+            width: 90%;
+        }
+
+        .rio {
+            height: 125px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="escena">
+
+    <div class="sol"></div>
+
+    <!-- 🌼 Flor -->
+    <div class="flor">
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="centro"></div>
+    </div>
+
+    <!-- 🌱 Tallo -->
+    <div class="tallo"></div>
+
+    <!-- 🌿 Raíces -->
+    <div class="raices">
+        <div class="raiz"></div>
+        <div class="raiz"></div>
+        <div class="raiz"></div>
+        <div class="raiz"></div>
+    </div>
+
+    <!-- 🌊 Río -->
+    <div class="rio">
+        <div class="onda"></div>
+        <div class="onda"></div>
+        <div class="onda"></div>
+    </div>
+
+    <!-- 💗 Mensaje -->
+    <div class="frase">
+        Me tienes corriendome <span class="corazon">💗</span>
+    </div>
+
+</div>
+
+</body>
+  </html>
