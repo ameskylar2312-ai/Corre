@@ -4,93 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flor 🌸</title>
+<title>Tormenta 🌧️</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    min-height: 100vh;
+html, body {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    font-family: Georgia, serif;
-    background: linear-gradient(
-        to bottom,
-        #dff7ff,
-        #c8edda 55%,
-        #82b875
-    );
 }
+
+body {
+    font-family: Georgia, serif;
+}
+
+/* ESCENA */
 
 .scene {
     position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #dff7fa 0%,
+            #ccebdc 55%,
+            #83b875 100%
+        );
+
+    transition: background 2s ease;
 }
 
-/* =========================
-   ESCENARIO
-========================= */
+
+/* CIELO */
 
 .sky {
     position: absolute;
     inset: 0;
+
     background:
-        radial-gradient(circle at 20% 20%, #ffffffaa 0 4%, transparent 5%),
-        radial-gradient(circle at 75% 15%, #ffffff88 0 3%, transparent 4%);
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,255,255,.45),
+            transparent 35%
+        );
+
+    transition: opacity 2s ease;
 }
+
+.storm .sky {
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(150,170,190,.22),
+            transparent 30%
+        ),
+        linear-gradient(
+            to bottom,
+            #273442,
+            #394856 45%,
+            #51616a
+        );
+}
+
+
+/* TIERRA */
 
 .ground {
     position: absolute;
+
+    left: 0;
     bottom: 0;
+
     width: 100%;
     height: 38%;
-    background: linear-gradient(
-        #8bc77a,
-        #57965b
-    );
+
+    background:
+        linear-gradient(
+            to bottom,
+            #91c979,
+            #568f58
+        );
+
     border-radius: 50% 50% 0 0;
+
+    transition:
+        filter 2s ease;
 }
 
-/* =========================
-   TEXTO "TOCA LA FLOR"
-========================= */
+.storm .ground {
+    filter:
+        brightness(.65)
+        saturate(.8);
+}
+
+
+/* TEXTO */
 
 .instruction {
+
     position: absolute;
+
     top: 9%;
     left: 50%;
+
     transform: translateX(-50%);
-    z-index: 20;
+
+    z-index: 50;
 
     color: #315b46;
-    font-size: clamp(18px, 4vw, 25px);
-    text-align: center;
 
-    animation: floating 2s infinite ease-in-out;
-    transition: opacity .6s;
+    font-size:
+        clamp(18px, 4vw, 25px);
+
+    transition:
+        opacity .7s,
+        color 1.5s;
 }
 
-@keyframes floating {
-    0%,100% {
-        transform: translate(-50%, 0);
-    }
-
-    50% {
-        transform: translate(-50%, -7px);
-    }
+.storm .instruction {
+    color: #dce8ed;
 }
 
-/* =========================
-   FLOR
-========================= */
+
+/* FLOR */
 
 .flower {
+
     position: absolute;
+
     left: 50%;
     bottom: 28%;
 
@@ -98,512 +149,990 @@ body {
     height: 210px;
 
     transform: translateX(-50%);
+
+    z-index: 20;
+
     cursor: pointer;
 
-    z-index: 10;
-
-    transition: transform .5s;
+    transition:
+        filter 1s ease;
 }
 
-.flower:hover {
-    transform: translateX(-50%) scale(1.04);
-}
+
+/* TALLO */
 
 .stem {
+
     position: absolute;
 
-    left: 61px;
-    top: 70px;
+    left: 50%;
+    bottom: 0;
 
-    width: 9px;
-    height: 140px;
+    width: 8px;
+    height: 145px;
 
-    background: #43834b;
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            to right,
+            #386e45,
+            #6eaa68,
+            #386e45
+        );
+
     border-radius: 20px;
 }
 
+
+/* HOJAS */
+
 .leaf {
+
     position: absolute;
 
     width: 62px;
     height: 28px;
 
-    background: #4d9a54;
+    background: #4d9557;
 
-    border-radius: 100% 0 100% 0;
+    border-radius:
+        100% 0 100% 0;
 }
 
 .leaf.left {
-    left: 4px;
-    top: 135px;
+
+    left: 5px;
+    bottom: 55px;
+
     transform: rotate(-25deg);
 }
 
 .leaf.right {
-    right: 0;
-    top: 110px;
-    transform: rotate(25deg) scaleX(-1);
+
+    right: 5px;
+    bottom: 85px;
+
+    transform:
+        scaleX(-1)
+        rotate(-25deg);
 }
 
+
+/* PÉTALOS */
+
 .petals {
+
     position: absolute;
 
-    left: 24px;
+    left: 50%;
     top: 0;
 
-    width: 85px;
-    height: 85px;
+    width: 105px;
+    height: 105px;
+
+    transform:
+        translateX(-50%);
 }
 
 .petal {
+
     position: absolute;
 
-    width: 48px;
-    height: 62px;
+    width: 55px;
+    height: 70px;
 
-    background: #ff91b8;
+    background:
+        linear-gradient(
+            to bottom,
+            #ffd8e5,
+            #ef91b1
+        );
 
     border-radius: 50%;
 
-    box-shadow:
-        inset 0 0 10px #ffffff77;
+    transition:
+        filter 1s ease;
 }
 
 .petal:nth-child(1) {
-    left: 18px;
+    left: 25px;
     top: 0;
 }
 
 .petal:nth-child(2) {
     left: 0;
-    top: 20px;
-    transform: rotate(-60deg);
+    top: 25px;
+
+    transform: rotate(-70deg);
 }
 
 .petal:nth-child(3) {
+
     right: 0;
-    top: 20px;
-    transform: rotate(60deg);
+    top: 25px;
+
+    transform: rotate(70deg);
 }
 
 .petal:nth-child(4) {
-    left: 18px;
-    top: 25px;
+
+    left: 25px;
+    bottom: -5px;
+
     transform: rotate(180deg);
 }
 
+
+/* CENTRO */
+
 .center {
-    position: absolute;
 
-    left: 32px;
-    top: 29px;
-
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    background: #ffd45b;
-
-    z-index: 2;
-}
-
-/* =========================
-   RAÍCES
-========================= */
-
-.roots {
     position: absolute;
 
     left: 50%;
-    bottom: 22%;
+    top: 42px;
 
-    width: 230px;
-    height: 130px;
-
-    transform: translateX(-50%) scaleY(0);
-
-    opacity: 0;
-
-    z-index: 5;
-
-    transform-origin: top;
-}
-
-.root {
-    position: absolute;
-
-    left: 50%;
-    top: 0;
-
-    width: 6px;
-    height: 110px;
-
-    background: #765333;
-
-    border-radius: 20px;
-
-    transform-origin: top;
-}
-
-.root:nth-child(1) {
-    transform: rotate(-55deg);
-}
-
-.root:nth-child(2) {
-    transform: rotate(-38deg);
-}
-
-.root:nth-child(3) {
-    transform: rotate(-20deg);
-}
-
-.root:nth-child(4) {
-    transform: rotate(0deg);
-}
-
-.root:nth-child(5) {
-    transform: rotate(20deg);
-}
-
-.root:nth-child(6) {
-    transform: rotate(38deg);
-}
-
-.root:nth-child(7) {
-    transform: rotate(55deg);
-}
-
-/* Aparecen al tocar */
-
-.roots-visible .roots {
-    animation: rootsGrow 1.2s ease-out forwards;
-}
-
-@keyframes rootsGrow {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) scaleY(0);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) scaleY(1);
-    }
-}
-
-/* =========================
-   GOTITAS
-========================= */
-
-.drop {
-    position: absolute;
-
-    width: 12px;
-    height: 20px;
-
-    background: #9eeeff;
-
-    border-radius: 50% 50% 50% 0;
-
-    transform: rotate(-45deg);
-
-    opacity: 0;
-
-    z-index: 20;
-}
-
-/* Las gotas aparecen de repente */
-
-.drops-visible .drop {
-    animation: fallingDrop .9s ease-in forwards;
-}
-
-.drop:nth-child(1) {
-    left: 43%;
-    top: 5%;
-}
-
-.drop:nth-child(2) {
-    left: 52%;
-    top: 12%;
-    animation-delay: .25s;
-}
-
-.drop:nth-child(3) {
-    left: 59%;
-    top: 4%;
-    animation-delay: .45s;
-}
-
-.drop:nth-child(4) {
-    left: 48%;
-    top: 20%;
-    animation-delay: .6s;
-}
-
-@keyframes fallingDrop {
-
-    0% {
-        opacity: 0;
-        transform: translateY(-30px) rotate(-45deg);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(400px) rotate(-45deg);
-    }
-}
-
-/* =========================
-   OLA GIGANTE
-========================= */
-
-.wave {
-    position: absolute;
-
-    left: -10%;
-    bottom: -45%;
-
-    width: 120%;
-    height: 65%;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #a6f7ff,
-            #52cde2 35%,
-            #238caf
-        );
-
-    border-radius: 50% 50% 0 0;
-
-    z-index: 25;
-
-    transform: translateY(100%);
-
-    box-shadow:
-        0 -15px 30px #ffffff99;
-}
-
-/* espuma */
-
-.wave::before {
-    content: "";
-
-    position: absolute;
-
-    top: 15px;
-    left: 0;
-
-    width: 100%;
+    width: 35px;
     height: 35px;
 
-    background: #d9ffffaa;
+    transform:
+        translateX(-50%);
+
+    background: #e5ad42;
 
     border-radius: 50%;
-
-    animation: waveMove 1.5s infinite ease-in-out;
 }
 
-.wave::after {
-    content: "";
+
+/* ⚡ RAYO */
+
+.lightning {
 
     position: absolute;
 
-    top: 65px;
-    left: 5%;
+    top: -10%;
+    left: 50%;
 
-    width: 90%;
-    height: 25px;
+    width: 120px;
+    height: 125%;
 
-    background: #ffffff55;
+    z-index: 60;
 
-    border-radius: 50%;
+    opacity: 0;
+
+    transform:
+        translateX(-50%);
+
+    /*
+       Ahora sí tiene forma de rayo:
+       zigzag grande y marcado.
+    */
+
+    clip-path: polygon(
+        48% 0%,
+        70% 0%,
+        58% 27%,
+        78% 27%,
+        38% 58%,
+        51% 58%,
+        22% 100%,
+        34% 62%,
+        20% 62%,
+        43% 32%,
+        25% 32%
+    );
+
+    background: white;
+
+    filter:
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 20px #bcefff)
+        drop-shadow(0 0 45px #8eeaff);
 }
 
-@keyframes waveMove {
 
-    0%,100% {
-        transform: translateX(-3%);
-    }
+/* FLASH */
 
-    50% {
-        transform: translateX(3%);
-    }
-}
+.light-flash {
 
-.wave-visible .wave {
-    animation: giantWave 2.2s cubic-bezier(.2,.75,.25,1) forwards;
-}
-
-@keyframes giantWave {
-
-    0% {
-        transform: translateY(100%);
-    }
-
-    65% {
-        transform: translateY(-5%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-/* =========================
-   DESENFOQUE FINAL
-========================= */
-
-.blur-screen {
     position: absolute;
 
     inset: 0;
 
+    z-index: 55;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* ANIMACIÓN DEL RAYO */
+
+.lightning-strike .lightning {
+
+    animation:
+        lightning .8s ease-out forwards;
+}
+
+.lightning-strike .light-flash {
+
+    animation:
+        flash .8s ease-out forwards;
+}
+
+
+@keyframes lightning {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(-30px)
+            scaleY(.8);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    20% {
+        opacity: .15;
+    }
+
+    28% {
+        opacity: 1;
+    }
+
+    45% {
+        opacity: .2;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scaleY(1);
+    }
+}
+
+
+@keyframes flash {
+
+    0% {
+        opacity: 0;
+    }
+
+    12% {
+        opacity: .65;
+    }
+
+    25% {
+        opacity: .08;
+    }
+
+    35% {
+        opacity: .45;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* GOTAS */
+
+.drop {
+
+    position: absolute;
+
+    top: -30px;
+
+    width: 9px;
+    height: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e9fcff,
+            #61d3e7
+        );
+
+    border-radius:
+        60% 40% 60% 40%;
+
+    transform:
+        rotate(-45deg);
+
+    opacity: 0;
+
     z-index: 40;
+}
+
+.drop:nth-of-type(1) {
+    left: 37%;
+}
+
+.drop:nth-of-type(2) {
+    left: 47%;
+}
+
+.drop:nth-of-type(3) {
+    left: 56%;
+}
+
+.drop:nth-of-type(4) {
+    left: 64%;
+}
+
+
+.drops-visible .drop {
+
+    animation:
+        naturalDrop
+        1.2s
+        ease-in
+        forwards;
+}
+
+
+.drop:nth-of-type(2) {
+    animation-delay: .15s;
+}
+
+.drop:nth-of-type(3) {
+    animation-delay: .3s;
+}
+
+.drop:nth-of-type(4) {
+    animation-delay: .45s;
+}
+
+
+@keyframes naturalDrop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-30px)
+            rotate(-45deg)
+            scale(.7);
+    }
+
+    20% {
+        opacity: .9;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(350px)
+            rotate(-45deg)
+            scale(1);
+    }
+}
+
+
+/* LLUVIA */
+
+.rain {
+
+    position: absolute;
+
+    inset: -20%;
+
+    z-index: 35;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            105deg,
+            transparent 0 17px,
+            rgba(220,249,255,.42) 18px,
+            rgba(220,249,255,.42) 20px,
+            transparent 21px 38px
+        );
+}
+
+
+.rain-active .rain {
+
+    animation:
+        heavyRain
+        2s
+        ease-in
+        forwards;
+}
+
+
+@keyframes heavyRain {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-20%);
+    }
+
+    30% {
+        opacity: .35;
+    }
+
+    100% {
+        opacity: .75;
+
+        transform:
+            translateY(20%);
+    }
+}
+
+
+/* AGUA */
+
+.water {
+
+    position: absolute;
+
+    left: -5%;
+    bottom: -110%;
+
+    width: 110%;
+    height: 120%;
+
+    z-index: 45;
+
+    opacity: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(154,235,243,.82),
+            rgba(69,186,210,.94) 30%,
+            rgba(35,135,165,.98) 70%,
+            #155f7d 100%
+        );
+
+    border-radius:
+        48% 52% 0 0 /
+        7% 7% 0 0;
+
+    box-shadow:
+        0 -12px 35px
+        rgba(255,255,255,.65);
+}
+
+
+.water::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -20px;
+    left: 0;
+
+    width: 100%;
+    height: 40px;
+
+    background:
+
+        radial-gradient(
+            ellipse at 15% 70%,
+            rgba(255,255,255,.7) 0 3%,
+            transparent 4%
+        ),
+
+        radial-gradient(
+            ellipse at 35% 30%,
+            rgba(255,255,255,.6) 0 4%,
+            transparent 5%
+        ),
+
+        radial-gradient(
+            ellipse at 55% 75%,
+            rgba(255,255,255,.7) 0 3%,
+            transparent 4%
+        ),
+
+        radial-gradient(
+            ellipse at 76% 40%,
+            rgba(255,255,255,.65) 0 4%,
+            transparent 5%
+        );
+}
+
+
+.water::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            170deg,
+            transparent 0 55px,
+            rgba(255,255,255,.07) 57px,
+            transparent 60px 100px
+        );
+}
+
+
+.flood-active .water {
+
+    animation:
+        flood
+        3.5s
+        cubic-bezier(.2,.7,.2,1)
+        forwards;
+}
+
+
+@keyframes flood {
+
+    0% {
+        bottom: -110%;
+        opacity: 0;
+    }
+
+    12% {
+        opacity: .3;
+    }
+
+    35% {
+        bottom: -70%;
+        opacity: .6;
+    }
+
+    60% {
+        bottom: -35%;
+        opacity: .82;
+    }
+
+    82% {
+        bottom: -12%;
+        opacity: .93;
+    }
+
+    100% {
+        bottom: -2%;
+        opacity: .96;
+    }
+}
+
+
+/* FLOR BAJO EL AGUA */
+
+.underwater .flower {
+
+    animation:
+        underwaterFlower
+        2.8s
+        ease-in-out
+        forwards;
+
+    filter:
+        saturate(.75)
+        brightness(.85);
+}
+
+
+@keyframes underwaterFlower {
+
+    0% {
+        transform:
+            translateX(-50%)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translateX(-50%)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            rotate(3deg);
+    }
+
+    75% {
+        transform:
+            translateX(-50%)
+            rotate(-2deg);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(2deg);
+    }
+}
+
+
+/* BURBUJAS */
+
+.bubbles {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 50;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+
+.bubble {
+
+    position: absolute;
+
+    bottom: -30px;
+
+    width: 10px;
+    height: 10px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.65);
+
+    border-radius: 50%;
+}
+
+
+.bubble:nth-child(1) {
+    left: 25%;
+}
+
+.bubble:nth-child(2) {
+    left: 39%;
+
+    width: 7px;
+    height: 7px;
+}
+
+.bubble:nth-child(3) {
+    left: 55%;
+
+    width: 14px;
+    height: 14px;
+}
+
+.bubble:nth-child(4) {
+    left: 70%;
+
+    width: 8px;
+    height: 8px;
+}
+
+.bubble:nth-child(5) {
+    left: 82%;
+
+    width: 13px;
+    height: 13px;
+}
+
+
+.bubbles-active .bubbles {
+    opacity: 1;
+}
+
+
+.bubbles-active .bubble {
+
+    animation:
+        bubbleUp
+        4s
+        ease-in
+        infinite;
+}
+
+
+.bubble:nth-child(2) {
+    animation-delay: .8s;
+}
+
+.bubble:nth-child(3) {
+    animation-delay: 1.4s;
+}
+
+.bubble:nth-child(4) {
+    animation-delay: .5s;
+}
+
+.bubble:nth-child(5) {
+    animation-delay: 2s;
+}
+
+
+@keyframes bubbleUp {
+
+    0% {
+
+        transform:
+            translateY(0)
+            translateX(0);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    100% {
+
+        transform:
+            translateY(-110vh)
+            translateX(20px);
+
+        opacity: 0;
+    }
+}
+
+
+/* RAYOS DE LUZ BAJO EL AGUA */
+
+.light-rays {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 47;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+
+        linear-gradient(
+            112deg,
+            transparent 25%,
+            rgba(255,255,255,.12) 28%,
+            transparent 34%
+        ),
+
+        linear-gradient(
+            70deg,
+            transparent 55%,
+            rgba(255,255,255,.1) 59%,
+            transparent 66%
+        );
+}
+
+
+.underwater .light-rays {
+
+    animation:
+        underwaterLight
+        3s
+        ease
+        forwards;
+}
+
+
+@keyframes underwaterLight {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* DESENFOQUE FINAL */
+
+.blur-screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 70;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     text-align: center;
 
-    padding: 30px;
+    background:
+        rgba(40,140,165,.2);
 
-    background: #ffffff15;
-
-    backdrop-filter: blur(0px);
+    backdrop-filter:
+        blur(0);
 
     opacity: 0;
 
     pointer-events: none;
 }
 
+
 .blur-screen p {
+
     color: white;
 
-    font-size: clamp(32px, 8vw, 75px);
+    font-size:
+        clamp(30px, 8vw, 70px);
 
     line-height: 1.15;
 
     text-shadow:
-        0 4px 18px #216477;
+        0 4px 20px
+        rgba(10,80,105,.9);
 
-    transform: scale(.7);
+    transform:
+        scale(.75);
 
     opacity: 0;
 }
 
-/* Activación final */
 
 .final .blur-screen {
-    animation: blurIn 2s ease forwards;
+
+    animation:
+        finalBlur
+        2s
+        ease
+        forwards;
 }
 
-@keyframes blurIn {
-
-    0% {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-
-    100% {
-        opacity: 1;
-        backdrop-filter: blur(9px);
-    }
-}
 
 .final .blur-screen p {
-    animation: textAppear 1.3s .5s ease forwards;
+
+    animation:
+        finalText
+        1.2s
+        .5s
+        ease
+        forwards;
 }
 
-@keyframes textAppear {
 
-    0% {
+@keyframes finalBlur {
+
+    from {
         opacity: 0;
-        transform: scale(.7);
+        backdrop-filter:
+            blur(0);
     }
 
-    100% {
+    to {
         opacity: 1;
-        transform: scale(1);
+        backdrop-filter:
+            blur(12px);
     }
 }
 
-/* =========================
-   REINICIAR
-========================= */
+
+@keyframes finalText {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(.75);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1);
+    }
+}
+
+
+/* BOTÓN */
 
 .restart {
+
     position: absolute;
 
-    bottom: 20px;
+    bottom: 5%;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    z-index: 50;
+    z-index: 90;
+
+    padding:
+        10px 20px;
 
     border: none;
 
-    padding: 12px 22px;
+    border-radius: 20px;
 
-    border-radius: 30px;
-
-    background: #ffffffdd;
+    background:
+        rgba(255,255,255,.85);
 
     color: #315b46;
 
-    font-family: Georgia, serif;
-
-    cursor: pointer;
+    font-family:
+        Georgia, serif;
 
     opacity: 0;
-    pointer-events: none;
 
-    transition: .3s;
+    pointer-events: none;
 }
 
+
 .final .restart {
+
     opacity: 1;
+
     pointer-events: auto;
 }
 
-.restart:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-}
 </style>
 </head>
+
 
 <body>
 
 <div class="scene" id="scene">
 
     <div class="sky"></div>
+
     <div class="ground"></div>
 
-    <!-- TEXTO INICIAL -->
+
     <div class="instruction" id="instruction">
-        Toca la flor 🌸
+        Toca la flor
     </div>
 
+
     <!-- FLOR -->
+
     <div class="flower" id="flower">
 
         <div class="petals">
@@ -624,41 +1153,64 @@ body {
 
     </div>
 
-    <!-- RAÍCES -->
-    <div class="roots">
 
-        <div class="root"></div>
-        <div class="root"></div>
-        <div class="root"></div>
-        <div class="root"></div>
-        <div class="root"></div>
-        <div class="root"></div>
-        <div class="root"></div>
+    <!-- GOTAS -->
+
+    <div class="drop"></div>
+    <div class="drop"></div>
+    <div class="drop"></div>
+    <div class="drop"></div>
+
+
+    <!-- RAYO -->
+
+    <div class="lightning"></div>
+
+    <div class="light-flash"></div>
+
+
+    <!-- LLUVIA -->
+
+    <div class="rain"></div>
+
+
+    <!-- AGUA -->
+
+    <div class="water"></div>
+
+
+    <!-- BURBUJAS -->
+
+    <div class="bubbles">
+
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
 
     </div>
 
-    <!-- GOTAS -->
-    <div class="drop"></div>
-    <div class="drop"></div>
-    <div class="drop"></div>
-    <div class="drop"></div>
 
-    <!-- OLA -->
-    <div class="wave"></div>
+    <!-- RAYOS DE LUZ -->
+
+    <div class="light-rays"></div>
+
 
     <!-- FINAL -->
+
     <div class="blur-screen">
 
         <p>
             Así me tienes,<br>
-            corriendome 
+            corriendome
         </p>
 
     </div>
 
-    <!-- REINICIAR -->
+
     <button class="restart" id="restart">
-        Volver a empezar ↻
+        Volver a empezar
     </button>
 
 </div>
@@ -666,23 +1218,23 @@ body {
 
 <script>
 
-const scene = document.getElementById("scene");
-const flower = document.getElementById("flower");
-const instruction = document.getElementById("instruction");
-const restart = document.getElementById("restart");
+const scene =
+    document.getElementById("scene");
+
+const flower =
+    document.getElementById("flower");
+
+const instruction =
+    document.getElementById("instruction");
+
+const restart =
+    document.getElementById("restart");
+
 
 let started = false;
 
 
-/*
-    SECUENCIA:
-
-    1. Tocas la flor.
-    2. Aparecen las raíces.
-    3. Caen las gotas.
-    4. Llega la ola gigante.
-    5. Todo se vuelve borroso.
-*/
+/* AL TOCAR LA FLOR */
 
 flower.addEventListener("click", () => {
 
@@ -692,36 +1244,87 @@ flower.addEventListener("click", () => {
 
     instruction.style.opacity = "0";
 
-    /* 1 — RAÍCES */
 
-    scene.classList.add("roots-visible");
+    /* 1. SE OSCURECE EL CIELO */
 
-
-    /* 2 — GOTITAS */
-
-    setTimeout(() => {
-
-        scene.classList.add("drops-visible");
-
-    }, 1300);
+    scene.classList.add("storm");
 
 
-    /* 3 — OLA */
+    /* 2. CAE EL RAYO */
 
     setTimeout(() => {
 
-        scene.classList.add("wave-visible");
+        scene.classList.add(
+            "lightning-strike"
+        );
 
-    }, 2300);
+    }, 250);
 
 
-    /* 4 — FINAL */
+    /* 3. PRIMERAS GOTAS */
 
     setTimeout(() => {
 
-        scene.classList.add("final");
+        scene.classList.add(
+            "drops-visible"
+        );
 
-    }, 4400);
+    }, 1000);
+
+
+    /* 4. LLUVIA FUERTE */
+
+    setTimeout(() => {
+
+        scene.classList.add(
+            "rain-active"
+        );
+
+    }, 1900);
+
+
+    /* 5. COMIENZA LA INUNDACIÓN */
+
+    setTimeout(() => {
+
+        scene.classList.add(
+            "flood-active"
+        );
+
+    }, 2400);
+
+
+    /* 6. LA FLOR QUEDA BAJO EL AGUA */
+
+    setTimeout(() => {
+
+        scene.classList.add(
+            "underwater"
+        );
+
+    }, 4000);
+
+
+    /* 7. APARECEN BURBUJAS */
+
+    setTimeout(() => {
+
+        scene.classList.add(
+            "bubbles-active"
+        );
+
+    }, 4300);
+
+
+    /* 8. TODO SE DESENFOCA */
+
+    setTimeout(() => {
+
+        scene.classList.add(
+            "final"
+        );
+
+    }, 6100);
 
 });
 
@@ -731,10 +1334,16 @@ flower.addEventListener("click", () => {
 restart.addEventListener("click", () => {
 
     scene.classList.remove(
-        "roots-visible",
+
+        "storm",
+        "lightning-strike",
         "drops-visible",
-        "wave-visible",
+        "rain-active",
+        "flood-active",
+        "underwater",
+        "bubbles-active",
         "final"
+
     );
 
     started = false;
